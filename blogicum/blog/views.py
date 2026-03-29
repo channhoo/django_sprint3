@@ -37,15 +37,15 @@ def category_posts(request, category_slug):
         )
     except Category.DoesNotExist:
         raise Http404("Категория не найдена")
-    
+
     post_list = Post.objects.filter(
         category=category,
         is_published=True,
         pub_date__lte=timezone.now()
     ).order_by('-pub_date')
-    
+
     return render(
-        request, 
-        'blog/category.html', 
+        request,
+        'blog/category.html',
         {'category': category, 'post_list': post_list}
     )
